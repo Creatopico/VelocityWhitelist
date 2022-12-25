@@ -22,7 +22,7 @@ import java.util.UUID;
 public class Configs {
 
     @Getter private static Config config;
-    @Getter private static Set<UUID> whitelist = new HashSet<>();
+    @Getter private static Set<String> whitelist = new HashSet<>();
     private static Path configFile;
     private static Path whitelistFile;
 
@@ -53,7 +53,7 @@ public class Configs {
         //Load whitelist players to memory (if any)
         if(whitelistFile.toFile().exists()) {
             try (InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(whitelistFile.toFile()), "UTF8")) {
-                Type whitelistSetType = new TypeToken<HashSet<UUID>>(){}.getType();
+                Type whitelistSetType = new TypeToken<HashSet<String>>(){}.getType();
                 whitelist = new Gson().fromJson(inputStreamReader, whitelistSetType);
             } catch (Exception e) {
                 velocityWhitelist.getLogger().error("Error loading whitelist.json");
